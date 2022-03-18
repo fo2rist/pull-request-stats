@@ -2676,7 +2676,7 @@ exports.MixpanelGroups = MixpanelGroups;
     },
     ja: {
       y: "年",
-      mo: "月",
+      mo: "ヶ月",
       w: "週",
       d: "日",
       h: "時間",
@@ -6543,7 +6543,7 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-const VERSION = "3.5.1";
+const VERSION = "3.6.0";
 
 const _excluded = ["authStrategy"];
 class Octokit {
@@ -8088,9 +8088,17 @@ AbortError.prototype = Object.create(Error.prototype);
 AbortError.prototype.constructor = AbortError;
 AbortError.prototype.name = 'AbortError';
 
+const URL$1 = Url.URL || whatwgUrl.URL;
+
 // fix an issue where "PassThrough", "resolve" aren't a named export for node <10
 const PassThrough$1 = Stream.PassThrough;
-const resolve_url = Url.resolve;
+
+const isDomainOrSubdomain = function isDomainOrSubdomain(destination, original) {
+	const orig = new URL$1(original).hostname;
+	const dest = new URL$1(destination).hostname;
+
+	return orig === dest || orig[orig.length - dest.length - 1] === '.' && orig.endsWith(dest);
+};
 
 /**
  * Fetch function
@@ -8178,7 +8186,19 @@ function fetch(url, opts) {
 				const location = headers.get('Location');
 
 				// HTTP fetch step 5.3
-				const locationURL = location === null ? null : resolve_url(request.url, location);
+				let locationURL = null;
+				try {
+					locationURL = location === null ? null : new URL$1(location, request.url).toString();
+				} catch (err) {
+					// error here can only be invalid URL in Location: header
+					// do not throw when options.redirect == manual
+					// let the user extract the errorneous redirect URL
+					if (request.redirect !== 'manual') {
+						reject(new FetchError(`uri requested responds with an invalid redirect URL: ${location}`, 'invalid-redirect'));
+						finalize();
+						return;
+					}
+				}
 
 				// HTTP fetch step 5.5
 				switch (request.redirect) {
@@ -8225,6 +8245,12 @@ function fetch(url, opts) {
 							timeout: request.timeout,
 							size: request.size
 						};
+
+						if (!isDomainOrSubdomain(request.url, locationURL)) {
+							for (const name of ['authorization', 'www-authenticate', 'cookie', 'cookie2']) {
+								requestOpts.headers.delete(name);
+							}
+						}
 
 						// HTTP-redirect fetch step 9
 						if (res.statusCode !== 303 && request.body && getTotalBytes(request) === null) {
@@ -8991,7 +9017,7 @@ function setup(env) {
 			namespaces = split[i].replace(/\*/g, '.*?');
 
 			if (namespaces[0] === '-') {
-				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+				createDebug.skips.push(new RegExp('^' + namespaces.slice(1) + '$'));
 			} else {
 				createDebug.names.push(new RegExp('^' + namespaces + '$'));
 			}
@@ -10562,7 +10588,7 @@ module.exports = (value) => parser(value, {
 /***/ 731:
 /***/ (function(module) {
 
-module.exports = {"name":"pull-request-stats","version":"2.2.0","description":"Github action to print relevant stats about Pull Request reviewers","main":"dist/index.js","scripts":{"build":"ncc build src/index.js","test":"yarn run build && jest"},"keywords":[],"author":"Manuel de la Torre","license":"agpl-3.0","jest":{"testEnvironment":"node","testMatch":["**/?(*.)+(spec|test).[jt]s?(x)"]},"dependencies":{"@actions/core":"^1.5.0","@actions/github":"^5.0.0","humanize-duration":"^3.27.0","jsurl":"^0.1.5","lodash.get":"^4.4.2","markdown-table":"^2.0.0","mixpanel":"^0.13.0"},"devDependencies":{"@zeit/ncc":"^0.22.3","eslint":"^7.32.0","eslint-config-airbnb-base":"^14.2.1","eslint-plugin-import":"^2.24.1","eslint-plugin-jest":"^24.4.0","jest":"^27.0.6"}};
+module.exports = {"name":"pull-request-stats","version":"2.2.0","description":"Github action to print relevant stats about Pull Request reviewers","main":"dist/index.js","scripts":{"build":"ncc build src/index.js","test":"npm run build && jest"},"keywords":[],"author":"Manuel de la Torre","license":"agpl-3.0","jest":{"testEnvironment":"node","testMatch":["**/?(*.)+(spec|test).[jt]s?(x)"]},"dependencies":{"@actions/core":"^1.5.0","@actions/github":"^5.0.0","humanize-duration":"^3.27.0","jsurl":"^0.1.5","lodash.get":"^4.4.2","markdown-table":"^2.0.0","mixpanel":"^0.13.0"},"devDependencies":{"@zeit/ncc":"^0.22.3","eslint":"^7.32.0","eslint-config-airbnb-base":"^14.2.1","eslint-plugin-import":"^2.24.1","eslint-plugin-jest":"^24.4.0","jest":"^27.0.6"}};
 
 /***/ }),
 
@@ -10673,7 +10699,7 @@ var isPlainObject = __webpack_require__(356);
 var nodeFetch = _interopDefault(__webpack_require__(454));
 var requestError = __webpack_require__(463);
 
-const VERSION = "5.6.2";
+const VERSION = "5.6.3";
 
 function getBufferResponse(response) {
   return response.arrayBuffer();

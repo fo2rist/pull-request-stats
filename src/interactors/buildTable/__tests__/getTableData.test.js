@@ -96,14 +96,16 @@ const CHARTS_NO_LINKS_RESPONSE = [
 describe('Interactors | .buildTable | .getTableData', () => {
   describe('when sending reviewers only', () => {
     it('returns the default case data', () => {
-      const response = getTableData({ reviewers });
+      const response = getTableData({ reviewers, disableLinks: false });
       expect(response).toEqual(SIMPLE_RESPONSE);
     });
   });
 
   describe('when sending bests and display charts', () => {
     it('returns the data with charts and medals', () => {
-      const response = getTableData({ bests, reviewers, displayCharts: true });
+      const response = getTableData({
+        bests, reviewers, displayCharts: true, disableLinks: false,
+      });
       expect(response).toEqual(CHARTS_RESPONSE);
     });
   });
@@ -127,7 +129,7 @@ describe('Interactors | .buildTable | .getTableData', () => {
   describe('when sending limit option', () => {
     it('limits the results', () => {
       const limit = 1;
-      const response = getTableData({ reviewers, limit });
+      const response = getTableData({ reviewers, limit, disableLinks: false });
       const titles = SIMPLE_RESPONSE[0];
       const resultRows = SIMPLE_RESPONSE.slice(1, 1 + limit);
       expect(response).toEqual([titles, ...resultRows]);

@@ -9969,7 +9969,7 @@ const applyLimit = (data, limit) => (limit > 0 ? data.slice(0, limit) : data);
 module.exports = ({
   reviewers,
   bests = {},
-  disableLinks = false,
+  disableLinks = true,
   displayCharts = false,
   limit = null,
 }) => {

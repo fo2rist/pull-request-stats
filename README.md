@@ -44,7 +44,7 @@ The possible inputs for this action are:
 | `organization` | If you prefer, you may specify the name of your organization to calculate the stats across all of its repos. When specifying an organization **it is mandatory to pass a Personal Access Token** in the `token` parameter. | `null`|
 | `period` | The length of the period used to calculate the stats, expressed in days. | `30` |
 | `charts` | Whether to add a chart to the start or not. Possible values: `true` or `false`. | `false` |
-| `disable-links` | If `true`, removes the links to the detailed charts. Possible values: `true` or `false`. | `false` |
+| `disable-links` | If `true`, removes the links to the detailed charts. Possible values: `true` or `false`. | `true` |
 | `sort-by` | The column used to sort the data. Possible values: `REVIEWS`, `TIME`, `COMMENTS`. | `REVIEWS` |
 | `limit` | The maximum number of rows to display in the table. A value of `0` means unlimited. |`0`|
 | `telemetry` | Indicates if the action is allowed to send monitoring data to the developer. This data is [minimal](/src/interactors/trackRun.js) and helps me improve this action. |`true`|

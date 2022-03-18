@@ -46,18 +46,18 @@ describe('Interactors | .buildTable', () => {
     expect(response).toEqual(SORTED_RESPONSE);
   });
 
-  it('with links enabled by default', () => {
+  it('with links disabled by default', () => {
     const response = buildTable(reviewers);
-    expect(response).toEqual(LINKS_RESPONSE);
+    expect(response).toEqual(SIMPLE_RESPONSE);
   });
 
   it('with limit is 1', () => {
-    const response = buildTable(reviewers, { limit: 1 });
+    const response = buildTable(reviewers, { limit: 1, disableLinks: false });
     expect(response).toEqual(LIMIT_ONE_RESPONSE);
   });
 
   it('with links and charts', () => {
-    const response = buildTable(reviewers, { displayCharts: true });
+    const response = buildTable(reviewers, { displayCharts: true, disableLinks: false });
     expect(response).toEqual(LINKS_AND_CHARTS_RESPONSE);
   });
 });

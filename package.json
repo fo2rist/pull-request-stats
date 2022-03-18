@@ -22,8 +22,7 @@
     "humanize-duration": "^3.27.0",
     "jsurl": "^0.1.5",
     "lodash.get": "^4.4.2",
-    "markdown-table": "^2.0.0",
-    "mixpanel": "^0.13.0"
+    "markdown-table": "^2.0.0"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3",

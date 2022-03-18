@@ -15,7 +15,7 @@ inputs:
   period:
     description: 'The length of the period used to calculate the stats, expressed in days'
     required: false
-    default: 30
+    default: '30'
   charts:
     description: 'Whether to add charts to the stats or not. Possible values: "true" or "false"'
     required: false
@@ -31,11 +31,7 @@ inputs:
   limit:
     description: 'The maximum number of rows to display in the table. A value of `0` means unlimited.'
     required: false
-    default: 0
-  telemetry:
-    description: 'Indicates if the action is allowed to send monitoring data to the developer.'
-    required: false
-    default: true
+    default: '0'
 runs:
   using: 'node12'
   main: 'dist/index.js'

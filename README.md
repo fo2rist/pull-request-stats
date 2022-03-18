@@ -47,7 +47,6 @@ The possible inputs for this action are:
 | `disable-links` | If `true`, removes the links to the detailed charts. Possible values: `true` or `false`. | `true` |
 | `sort-by` | The column used to sort the data. Possible values: `REVIEWS`, `TIME`, `COMMENTS`. | `REVIEWS` |
 | `limit` | The maximum number of rows to display in the table. A value of `0` means unlimited. |`0`|
-| `telemetry` | Indicates if the action is allowed to send monitoring data to the developer. This data is [minimal](/src/interactors/trackRun.js) and helps me improve this action. |`true`|
 
 
 ## Examples

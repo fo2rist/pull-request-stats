@@ -9,9 +9,6 @@ const {
   buildTable,
   buildComment,
   postComment,
-  trackError,
-  trackRun,
-  trackSuccess,
 } = require('./interactors');
 
 const run = async (params) => {
@@ -69,14 +66,5 @@ const run = async (params) => {
 };
 
 module.exports = async (params) => {
-  try {
-    if (params.telemetry) trackRun(params);
-    const start = new Date();
-    const executed = await run(params);
-    const timeMs = new Date() - start;
-    if (params.telemetry) trackSuccess({ executed, timeMs });
-  } catch (error) {
-    if (params.telemetry) trackError(error);
-    throw error;
-  }
+  await run(params);
 };

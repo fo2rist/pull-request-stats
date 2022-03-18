@@ -5,9 +5,6 @@ const getPullRequest = require('./getPullRequest');
 const getPulls = require('./getPulls');
 const getReviewers = require('./getReviewers');
 const postComment = require('./postComment');
-const trackError = require('./trackError');
-const trackRun = require('./trackRun');
-const trackSuccess = require('./trackSuccess');
 
 module.exports = {
   alreadyPublished,
@@ -17,7 +14,4 @@ module.exports = {
   getPulls,
   getReviewers,
   postComment,
-  trackError,
-  trackRun,
-  trackSuccess,
 };

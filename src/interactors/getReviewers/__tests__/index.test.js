@@ -21,4 +21,25 @@ describe('Interactors | getReviewers', () => {
       expect(reviewer.stats).toHaveProperty('timeToReview');
     });
   });
+
+  it('excludes given reviewers from stats', () => {
+    const result = getReviewers(input, ['jartmez']);
+    expect(result.length).toEqual(1);
+
+    const authors = result.map((r) => r.author.login);
+    expect(authors).toContain('manuelmhtr');
+    expect(authors).not.toContain('jartmez');
+
+    result.forEach((reviewer) => {
+      expect(reviewer).toHaveProperty('author');
+      expect(reviewer.author).toHaveProperty('id');
+      expect(reviewer.author).toHaveProperty('login');
+
+      expect(reviewer).toHaveProperty('reviews');
+      expect(reviewer.reviews.length > 0).toBe(true);
+
+      expect(reviewer).toHaveProperty('stats');
+      expect(reviewer.stats).toHaveProperty('timeToReview');
+    });
+  });
 });

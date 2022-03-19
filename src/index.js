@@ -30,6 +30,7 @@ const getParams = () => {
     currentRepo,
     org: core.getInput('organization'),
     repos: getRepositories(currentRepo),
+    excludedReviewers: JSON.parse(core.getInput('excluded-reviewers')),
     sortBy: core.getInput('sort-by'),
     githubToken: core.getInput('token'),
     periodLength: getPeriod(),

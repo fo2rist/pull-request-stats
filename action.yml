@@ -12,6 +12,10 @@ inputs:
   organization:
     description: 'An organization name to use all of its repositories to calculate the stats.'
     required: false
+  excluded-reviewers:
+    description: 'List of user IDs to exclude from stats'
+    required: false
+    default: '[]'
   period:
     description: 'The length of the period used to calculate the stats, expressed in days'
     required: false

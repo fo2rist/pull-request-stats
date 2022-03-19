@@ -1020,10 +1020,17 @@ module.exports = getContributions;
 const calculateReviewsStats = __webpack_require__(57);
 const groupReviews = __webpack_require__(755);
 
-module.exports = (pulls) => groupReviews(pulls).map(({ author, reviews }) => {
-  const stats = calculateReviewsStats(reviews);
-  return { author, reviews, stats };
-});
+module.exports = (pulls, excludedAuthors = []) => {
+  const groupedStats = groupReviews(pulls).map(({ author, reviews }) => (
+    {
+      author,
+      reviews,
+      stats: calculateReviewsStats(reviews),
+    }
+  ));
+
+  return groupedStats.filter((r) => !excludedAuthors.includes(r.author.login));
+};
 
 
 /***/ }),
@@ -8047,6 +8054,7 @@ const run = async (params) => {
   const {
     org,
     repos,
+    excludedReviewers,
     sortBy,
     githubToken,
     periodLength,
@@ -8072,7 +8080,8 @@ const run = async (params) => {
   core.info(`Found ${pulls.length} pull requests to analyze`);
 
   const reviewers = getReviewers(pulls);
-  core.info(`Analyzed stats for ${reviewers.length} pull request reviewers`);
+  core.info(`Analyzed stats for ${reviewers.length} pull request reviewers: ${reviewers.map((r) => r.author.login)}`);
+  core.info(`Reviewers excluded from stats: ${excludedReviewers}`);
 
   const table = buildTable(reviewers, {
     limit,
@@ -8180,6 +8189,7 @@ const getParams = () => {
     currentRepo,
     org: core.getInput('organization'),
     repos: getRepositories(currentRepo),
+    excludedReviewers: JSON.parse(core.getInput('excluded-reviewers')),
     sortBy: core.getInput('sort-by'),
     githubToken: core.getInput('token'),
     periodLength: getPeriod(),

@@ -15,6 +15,7 @@ const run = async (params) => {
   const {
     org,
     repos,
+    excludedReviewers,
     sortBy,
     githubToken,
     periodLength,
@@ -40,7 +41,8 @@ const run = async (params) => {
   core.info(`Found ${pulls.length} pull requests to analyze`);
 
   const reviewers = getReviewers(pulls);
-  core.info(`Analyzed stats for ${reviewers.length} pull request reviewers`);
+  core.info(`Analyzed stats for ${reviewers.length} pull request reviewers: ${reviewers.map((r) => r.author.login)}`);
+  core.info(`Reviewers excluded from stats: ${excludedReviewers}`);
 
   const table = buildTable(reviewers, {
     limit,

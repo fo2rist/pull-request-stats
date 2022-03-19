@@ -42,6 +42,7 @@ The possible inputs for this action are:
 | `token` | `GITHUB_TOKEN` or a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with "repo" permission. | `GITHUB_TOKEN` |
 | `repositories` | A comma separated list of github repositories to calculate the stats. When specifying other repo(s) **it is mandatory to pass a Personal Access Token** in the `token` parameter. | Current repository |
 | `organization` | If you prefer, you may specify the name of your organization to calculate the stats across all of its repos. When specifying an organization **it is mandatory to pass a Personal Access Token** in the `token` parameter. | `null`|
+| `excluded-reviewers` | User to exclude from stat (should be a string with JSON array of user IDs e.g `'["@fo2rist"]'`). | `'[]'` |
 | `period` | The length of the period used to calculate the stats, expressed in days. | `30` |
 | `charts` | Whether to add a chart to the start or not. Possible values: `true` or `false`. | `false` |
 | `disable-links` | If `true`, removes the links to the detailed charts. Possible values: `true` or `false`. | `true` |
@@ -107,6 +108,7 @@ jobs:
           charts: true
           disable-links: true
           sort-by: 'COMMENTS'
+          excluded-reviewers: '["fo2rist", "fo2rist"]'
 ```
 
 This config will:

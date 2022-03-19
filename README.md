@@ -1,36 +1,29 @@
 # Pull Request Stats
 
-[![CI](https://github.com/flowwer-dev/pull-request-stats/workflows/Tests/badge.svg)](https://github.com/flowwer-dev/pull-request-stats/actions?query=workflow%3ATests)
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Pull%20Request%20Stats-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAM6wAADOsB5dZE0gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAERSURBVCiRhZG/SsMxFEZPfsVJ61jbxaF0cRQRcRJ9hlYn30IHN/+9iquDCOIsblIrOjqKgy5aKoJQj4O3EEtbPwhJbr6Te28CmdSKeqzeqr0YbfVIrTBKakvtOl5dtTkK+v4HfA9PEyBFCY9AGVgCBLaBp1jPAyfAJ/AAdIEG0dNAiyP7+K1qIfMdonZic6+WJoBJvQlvuwDqcXadUuqPA1NKAlexbRTAIMvMOCjTbMwl1LtI/6KWJ5Q6rT6Ht1MA58AX8Apcqqt5r2qhrgAXQC3CZ6i1+KMd9TRu3MvA3aH/fFPnBodb6oe6HM8+lYHrGdRXW8M9bMZtPXUji69lmf5Cmamq7quNLFZXD9Rq7v0Bpc1o/tp0fisAAAAASUVORK5CYII=)](https://github.com/marketplace/actions/pull-request-stats)
+[![CI](https://github.com/fo2rist/pull-request-stats/workflows/Tests/badge.svg)](https://github.com/fo2rist/pull-request-stats/actions?query=workflow%3ATests)
 
 Github action to print relevant stats about Pull Request reviewers.
-
-The objective of this action is to:
-
-* Reduce the time taken to review the pull requests.
-* Encourage quality on reviews.
-* Help deciding which people to assign as reviewers.
+Fork of the [pull-request-stats](https://github.com/flowwer-dev/pull-request-stats) without telemtery and with extra features.
 
 Running this action will add a section at the bottom of your pull requests description:
 
 ![](/assets/pull-request.png)
 
-Each reviewer has a link pointing to their [historical behavior](https://app.flowwer.dev/charts/review-time/~(u~(i~'2741~n~'ddh)~p~30~r~(~(d~'qq57xy~t~'3co)~(d~'qqedft~t~'i1i)~(d~'qqfmub~t~'1rg0)~(d~'qqhjco~t~'5u)~(d~'qqlxa9~t~'20lw)~(d~'qqqo38~t~'2kp)~(d~'qpgl4i~t~'40i)~(d~'qpgq0r~t~'8wr)~(d~'qpgqv1~t~'9r1)~(d~'qqdzub~t~'398)~(d~'qq2xpc~t~'iz)~(d~'qpgoox~t~'1ep)~(d~'qpggla~t~'dt)~(d~'qpin24~t~'3nk)~(d~'qpi9kk~t~'1a89)~(d~'qpf7la~t~'jlz)~(d~'qprdyz~t~'1201)~(d~'qprf42~t~'1354)~(d~'qq4tod~t~'4ye)~(d~'qq4u7p~t~'5hq)~(d~'qq4wf3~t~'7p4)~(d~'qq4wgp~t~'7qq)~(d~'qq4g4a~t~'2v3)~(d~'qptb3r~t~'25p)~(d~'qpobfp~t~'2aq)~(d~'qq70w7~t~'ux)~(d~'qq6p5h~t~'g3d)~(d~'qqedrz~t~'im6)~(d~'qqg4sc~t~'b4)~(d~'qqlxo9~t~'a4s)~(d~'qqun50~t~'2nz)~(d~'qqr8mt~t~'14q)~(d~'qqumbp~t~'1fp)))) of each reviewer:
-
-![](/assets/historical.png)
+Each reviewer can have a link pointing to their [historical behavior](https://app.flowwer.dev/charts/review-time/~(u~(i~'2741~n~'ddh)~p~30~r~(~(d~'qq57xy~t~'3co)~(d~'qqedft~t~'i1i)~(d~'qqfmub~t~'1rg0)~(d~'qqhjco~t~'5u)~(d~'qqlxa9~t~'20lw)~(d~'qqqo38~t~'2kp)~(d~'qpgl4i~t~'40i)~(d~'qpgq0r~t~'8wr)~(d~'qpgqv1~t~'9r1)~(d~'qqdzub~t~'398)~(d~'qq2xpc~t~'iz)~(d~'qpgoox~t~'1ep)~(d~'qpggla~t~'dt)~(d~'qpin24~t~'3nk)~(d~'qpi9kk~t~'1a89)~(d~'qpf7la~t~'jlz)~(d~'qprdyz~t~'1201)~(d~'qprf42~t~'1354)~(d~'qq4tod~t~'4ye)~(d~'qq4u7p~t~'5hq)~(d~'qq4wf3~t~'7p4)~(d~'qq4wgp~t~'7qq)~(d~'qq4g4a~t~'2v3)~(d~'qptb3r~t~'25p)~(d~'qpobfp~t~'2aq)~(d~'qq70w7~t~'ux)~(d~'qq6p5h~t~'g3d)~(d~'qqedrz~t~'im6)~(d~'qqg4sc~t~'b4)~(d~'qqlxo9~t~'a4s)~(d~'qqun50~t~'2nz)~(d~'qqr8mt~t~'14q)~(d~'qqumbp~t~'1fp)))) of each reviewer:
 
 ## Privacy
-* **No repository data is collected**, stored or distributed by this GitHub action. This action is **state-less**.
-* Charts data is send over the URL, and never stored or transmitted anywhere else.
-* [Minimal data](/src/interactors/trackRun.js) is send to Mixpanel in order to improve this action. However, you can opt-out using `telemtry` option.
+* **No repository data is collected**, stored or distributed by this GitHub action. This action is **state-less**
+* No telemetry is collected
+* Charts data is send over the URL, and never stored or transmitted anywhere else
+* Charts links are disabled by default
 
 ## Usage
 
-Just add this action to one of your [workflow files](https://docs.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow):
+Add this action to one of your [workflow files](https://docs.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow):
 
 ```yml
-      - name: Run pull request stats
-        uses: flowwer-dev/pull-request-stats@master
+      - name: Post pull request stats
+        uses: fo2rist/pull-request-stats@master
 ```
 
 ### Action inputs
@@ -66,16 +59,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run pull request stats
-        uses: flowwer-dev/pull-request-stats@master
+        uses: fo2rist/pull-request-stats@master
 ```
 
-This config will:
-
-* Calculate the reviewer stats for the current repo in the lasts 30 days
-* Add links to the historial data
-* Sort results by the "total reviews" column by default
-
-and print a table like this:
+This config will add a table like this to PR description:
 
 |                                                                                                                                                                    | User          | Total reviews | Median time to review                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Total comments |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------------- |
@@ -100,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run pull request stats
-        uses: flowwer-dev/pull-request-stats@master
+        uses: fo2rist/pull-request-stats@master
         with:
           token: ${{ secrets.ADD_A_PERSONAL_ACCESS_TOKEN }}
           organization: 'piedpiper'
@@ -118,7 +105,7 @@ This config will:
 * Remove the links to detailed charts
 * Sort results by the "comments" column
 
-and print a table like this:
+and add a table like this:
 
 |                                                                                                                                                                     | User                 | Total comments      | Total reviews      | Median time to review     |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------- | ------------------ | ------------------- |
@@ -138,21 +125,6 @@ The stats are calculated as following:
 * **Median time to review:** It is the median of the _times to review_ of all Pull Requests reviewed by a person in the period.
 * **Total reviews:** It is the count of all Pull Requests reviewed by a person in the period.
 * **Total comments:** It is the count of all the comments while reviewing other user's Pull Requests in the period (comments in own PRs don't count).
-
-## Used by
-
-Used by tens of successful teams like:
-
-| <a href="https://www.sixt.com/"><img src="https://avatars.githubusercontent.com/u/25441140?s=200&v=4" width="64"></a><br/>Sixt | <a href="https://shop.lululemon.com"><img src="https://avatars.githubusercontent.com/u/17386352?s=200&v=4" width="64"></a><br/>Lululemon | <a href="https://www.deliveryhero.com"><img src="https://avatars.githubusercontent.com/u/7225556?s=200&v=4" width="64"></a><br/>Delivery H | <a href="https://jokr.com/"><img src="https://avatars.githubusercontent.com/u/84920342?s=200&v=4" width="64"></a><br/>JOKR | <a href="http://qatalog.com/"><img src="https://avatars.githubusercontent.com/u/56023495?s=200&v=4" width="64"></a><br/>Qatalog | <a href="https://firework.tv/"><img src="https://avatars.githubusercontent.com/u/25275837?s=200&v=4" width="64"></a><br/>LOOP | <a href="https://www.usehatchapp.com/"><img src="https://avatars.githubusercontent.com/u/38331218?s=200&v=4" width="64"></a><br/>Hatch | <a href="https://www.zenfi.mx/"><img src="https://avatars.githubusercontent.com/u/68744962?s=200&v=4" width="64"></a><br/>Zenfi |
-| -- | -- | -- | -- | -- | -- | -- | -- |
-
-## Help
-
-This project is maintained by a single person, considering supporting the project by:
-
-* Sharing your [feedback](https://forms.gle/W18tgBWp5YWt2qYEA).
-* Joining the [community](https://discord.gg/SGYbZkac).
-* Becoming a [sponsor](https://github.com/sponsors/manuelmhtr).
 
 ### License
 

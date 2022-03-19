@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2022-03-19
+### Added
+- Add `excluded-reviewers` option to exclude non-active users and bots from stats.
+### Changed
+- Change `disable-links` option to false by default.
+### Removed
+- Removed telemetry.
+
 ## [2.2.0] - 2022-02-27
 ### Added
 - Add disclaimer about privacy ([#22](https://github.com/flowwer-dev/pull-request-stats/pull/22)) by [marcocrasso](https://github.com/marcocrasso)).

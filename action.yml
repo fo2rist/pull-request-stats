@@ -1,6 +1,6 @@
-name: 'Pull Request Stats'
-author: 'Manuel de la Torre'
-description: 'Github action to print relevant stats about Pull Request reviewers'
+name: 'Pull Request Stats (no tracking)'
+author: 'fo2rist'
+description: 'Action to print stats about Pull Request reviewers in PR description'
 inputs:
   token:
     description: 'The GitHub authentication token'
@@ -40,5 +40,5 @@ runs:
   using: 'node12'
   main: 'dist/index.js'
 branding:
-  icon: 'award'
-  color: 'yellow'
+  icon: 'bar-chart-2'
+  color: 'green'

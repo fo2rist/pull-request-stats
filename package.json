@@ -1,14 +1,14 @@
 {
   "name": "pull-request-stats",
-  "version": "2.2.0",
-  "description": "Github action to print relevant stats about Pull Request reviewers",
+  "version": "2.3.0",
+  "description": "Github action to print stats about Pull Request reviewers",
   "main": "dist/index.js",
   "scripts": {
     "build": "ncc build src/index.js",
     "test": "npm run build && jest"
   },
   "keywords": [],
-  "author": "Manuel de la Torre",
+  "author": "fo2rist",
   "license": "agpl-3.0",
   "jest": {
     "testEnvironment": "node",

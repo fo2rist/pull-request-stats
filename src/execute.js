@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { subtractDaysToDate } = require('./utils');
 const {
   alreadyPublished,
   getPulls,
@@ -8,8 +7,10 @@ const {
   getReviewers,
   buildTable,
   buildComment,
+  buildSummary,
   postComment,
 } = require('./interactors');
+const { subtractDaysToDate } = require('./utils');
 
 const run = async (params) => {
   const {
@@ -20,6 +21,7 @@ const run = async (params) => {
     githubToken,
     periodLength,
     displayCharts,
+    displaySummary,
     disableLinks,
     pullRequestId,
     limit,
@@ -44,7 +46,10 @@ const run = async (params) => {
   const reviewers = getReviewers(pulls, excludedReviewers);
   core.info(`Analyzed stats for ${reviewers.length} pull request reviewers: ${reviewers.map((r) => r.author.login)}`);
   core.info(`Reviewers excluded from stats: ${excludedReviewers}`);
+  // Get all reviews ungrouped
+  const allReviews = reviewers.reduce((acc, reviewer) => acc.concat(reviewer.reviews), []);
 
+  // Generate PR comment
   const table = buildTable(reviewers, {
     limit,
     sortBy,
@@ -52,9 +57,11 @@ const run = async (params) => {
     periodLength,
     displayCharts,
   });
-  core.debug('Stats table built successfully');
 
-  const content = buildComment({ table, periodLength });
+  const summary = displaySummary ? `\n\n${buildSummary(allReviews)}` : '';
+
+  const content = `${buildComment({ table, periodLength })}${summary}`;
+
   core.debug(`Commit content built successfully: ${content}`);
 
   await postComment({

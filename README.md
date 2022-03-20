@@ -39,6 +39,7 @@ The possible inputs for this action are:
 | `excluded-reviewers` | User to exclude from stat (should be a string with JSON array of user IDs e.g `'["@fo2rist"]'`). | `'[]'` |
 | `period` | The length of the period used to calculate the stats, expressed in days. | `30` |
 | `charts` | Whether to add a chart to the start or not. Possible values: `true` or `false`. | `false` |
+| `summary` | Whether to add summary stats for period. | `true` |
 | `disable-links` | If `true`, removes the links to the detailed charts. Possible values: `true` or `false`. | `true` |
 | `sort-by` | The column used to sort the data. Possible values: `REVIEWS`, `TIME`, `COMMENTS`. | `REVIEWS` |
 | `limit` | The maximum number of rows to display in the table. A value of `0` means unlimited. |`0`|

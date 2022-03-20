@@ -24,6 +24,10 @@ inputs:
     description: 'Whether to add charts to the stats or not. Possible values: "true" or "false"'
     required: false
     default: 'false'
+  summary:
+    description: 'Whether to add summary stats for period. Possible values: "true" or "false"'
+    required: false
+    default: 'true'
   sort-by:
     description: 'The column used to sort the data. Possible values: "REVIEWS", "TIME" or "COMMENTS"'
     required: false

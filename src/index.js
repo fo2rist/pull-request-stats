@@ -35,6 +35,7 @@ const getParams = () => {
     githubToken: core.getInput('token'),
     periodLength: getPeriod(),
     displayCharts: parseBoolean(core.getInput('charts')),
+    displaySummary: parseBoolean(core.getInput('summary')),
     disableLinks: parseBoolean(core.getInput('disable-links')),
     pullRequestId: getPrId(),
     limit: parseInt(core.getInput('limit'), 10),

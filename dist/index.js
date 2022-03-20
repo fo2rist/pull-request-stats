@@ -8039,7 +8039,6 @@ module.exports.implForWrapper = function (wrapper) {
 
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
-const { subtractDaysToDate } = __webpack_require__(353);
 const {
   alreadyPublished,
   getPulls,
@@ -8047,8 +8046,10 @@ const {
   getReviewers,
   buildTable,
   buildComment,
+  buildSummary,
   postComment,
 } = __webpack_require__(942);
+const { subtractDaysToDate } = __webpack_require__(353);
 
 const run = async (params) => {
   const {
@@ -8059,6 +8060,7 @@ const run = async (params) => {
     githubToken,
     periodLength,
     displayCharts,
+    displaySummary,
     disableLinks,
     pullRequestId,
     limit,
@@ -8083,7 +8085,10 @@ const run = async (params) => {
   const reviewers = getReviewers(pulls, excludedReviewers);
   core.info(`Analyzed stats for ${reviewers.length} pull request reviewers: ${reviewers.map((r) => r.author.login)}`);
   core.info(`Reviewers excluded from stats: ${excludedReviewers}`);
+  // Get all reviews ungrouped
+  const allReviews = reviewers.reduce((acc, reviewer) => acc.concat(reviewer.reviews), []);
 
+  // Generate PR comment
   const table = buildTable(reviewers, {
     limit,
     sortBy,
@@ -8091,9 +8096,11 @@ const run = async (params) => {
     periodLength,
     displayCharts,
   });
-  core.debug('Stats table built successfully');
 
-  const content = buildComment({ table, periodLength });
+  const summary = displaySummary ? `\n\n${buildSummary(allReviews)}` : '';
+
+  const content = `${buildComment({ table, periodLength })}${summary}`;
+
   core.debug(`Commit content built successfully: ${content}`);
 
   await postComment({
@@ -8195,6 +8202,7 @@ const getParams = () => {
     githubToken: core.getInput('token'),
     periodLength: getPeriod(),
     displayCharts: parseBoolean(core.getInput('charts')),
+    displaySummary: parseBoolean(core.getInput('summary')),
     disableLinks: parseBoolean(core.getInput('disable-links')),
     pullRequestId: getPrId(),
     limit: parseInt(core.getInput('limit'), 10),
@@ -8802,6 +8810,21 @@ module.exports = {
   }
 };
 
+
+
+/***/ }),
+
+/***/ 785:
+/***/ (function(module, __unusedexports, __webpack_require__) {
+
+const calculateReviewsStats = __webpack_require__(57);
+const { durationToString } = __webpack_require__(353);
+
+module.exports = (reviews) => {
+  const summaryStats = calculateReviewsStats(reviews);
+  const summary = `**TOTALS | PRs**: ${summaryStats.totalReviews}. **Comments:** ${summaryStats.totalComments}. **Time to review:** ${durationToString(summaryStats.timeToReview)}`;
+  return summary;
+};
 
 
 /***/ }),
@@ -12422,6 +12445,7 @@ module.exports.parseURL = function (input, options) {
 const alreadyPublished = __webpack_require__(217);
 const buildTable = __webpack_require__(194);
 const buildComment = __webpack_require__(641);
+const buildSummary = __webpack_require__(785);
 const getPullRequest = __webpack_require__(435);
 const getPulls = __webpack_require__(591);
 const getReviewers = __webpack_require__(164);
@@ -12431,6 +12455,7 @@ module.exports = {
   alreadyPublished,
   buildTable,
   buildComment,
+  buildSummary,
   getPullRequest,
   getPulls,
   getReviewers,

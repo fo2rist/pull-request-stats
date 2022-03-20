@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2022-03-21
+### Added
+- Add `summary` option to publish summary stats.
+
 ## [2.3.1] - 2022-03-19
 ### Fixed
 - Fix `excluded-reviewers` option was not applied.

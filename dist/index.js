@@ -8079,7 +8079,8 @@ const run = async (params) => {
   });
   core.info(`Found ${pulls.length} pull requests to analyze`);
 
-  const reviewers = getReviewers(pulls);
+  // Calculate stats for each reviewer
+  const reviewers = getReviewers(pulls, excludedReviewers);
   core.info(`Analyzed stats for ${reviewers.length} pull request reviewers: ${reviewers.map((r) => r.author.login)}`);
   core.info(`Reviewers excluded from stats: ${excludedReviewers}`);
 

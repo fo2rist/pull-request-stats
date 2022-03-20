@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.3.1] - 2022-03-19
+### Fixed
+- Fix `excluded-reviewers` option was not applied.
 ## [2.3.0] - 2022-03-19
 ### Added
 - Add `excluded-reviewers` option to exclude non-active users and bots from stats.
